@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-063933E3C2"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-063933E3C2");
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Truchet Tiles: Random Rotations into Mazes and Meanders</title>
+    <meta
+      name="description"
+      content="Truchet Tiles: lay one tile at random rotations and watch quarter arcs, triangles and diagonals weave into mazes, meanders and loops. Click to turn tiles, two-color the regions, and download PNG or SVG."
+    />
+    <meta name="author" content="Olivier Giulieri" />
+    <link
+      rel="canonical"
+      href="https://evoluteur.github.io/truchet-tiles/"
+    />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <meta name="theme-color" content="#1a212d" />
+    <meta property="og:site_name" content="Truchet Tiles" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Truchet Tiles" />
+    <meta
+      property="og:description"
+      content="One tile, turned at random: quarter arcs and diagonals weave into mazes, meanders and loops."
+    />
+    <meta
+      property="og:url"
+      content="https://evoluteur.github.io/truchet-tiles/"
+    />
+    <meta
+      property="og:image"
+      content="https://evoluteur.github.io/truchet-tiles/truchet-tiles.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Overpass"
+    />
+    <link id="omg-core-css" rel="stylesheet" href="css/core.css" />
+    <script>
+      // Themes (dark, light, evol-blue) are copies of omg-themes; set OMG_THEMES_BASE to link the hosted ones instead.
+      window.OMG_THEMES_BASE = ""; // or "https://evoluteur.github.io/omg-themes/" to link the hosted themes
+      window.OMG_DEFAULT_THEME = "dark";
+      (function () {
+        var t = window.OMG_DEFAULT_THEME;
+        try {
+          t = localStorage.getItem("omg-theme") || t;
+        } catch (e) {}
+        if (t !== "dark" && t !== "light" && t !== "evol-blue")
+          t = window.OMG_DEFAULT_THEME;
+        document.documentElement.setAttribute("data-theme", t);
+        // written here (not in the markup) so the saved theme loads before first paint
+        document.write(
+          '<link id="omg-theme-css" rel="stylesheet" href="' +
+            window.OMG_THEMES_BASE +
+            "css/themes/" +
+            t +
+            "/" +
+            t +
+            '.css" />',
+        );
+      })();
+    </script>
+    <link id="omg-density-css" rel="stylesheet" href="css/densities.css" />
+    <link rel="stylesheet" href="css/truchet.css" />
+
+    <script src="js/omg.js"></script>
+    <script src="js/truchet.js"></script>
+  </head>
+
+  <body
+    onload="
+      setupPage('home');
+      initTruchet();
+    "
+    id="omg-body"
+  >
+    <div id="omg-header">
+      <h1>Truchet Tiles</h1>
+      <div id="omg-header-tools">
+        <div id="omg-theme-picker"></div>
+        <a
+          id="omg-github"
+          href="https://github.com/evoluteur/truchet-tiles"
+          target="_blank"
+          rel="noopener"
+          title="Truchet Tiles on GitHub"
+          aria-label="Truchet Tiles on GitHub"
+          ><svg viewBox="0 0 16 16" aria-hidden="true">
+            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" /></svg
+        ></a>
+      </div>
+    </div>
+    <h2>One tile, turned at random</h2>
+    <div class="content">
+      <div class="app-layout">
+        <div class="art-wrap">
+          <canvas id="tiles" aria-label="Truchet tiles"></canvas>
+        </div>
+        <div class="controls">
+          <label>Tiles <select id="set"></select></label>
+          <p id="set-text" class="hint"></p>
+          <label>Tiles across <input id="n" type="range" min="4" max="48" step="1" /></label>
+          <label>Line width <input id="width" type="range" min="0.04" max="0.4" step="0.01" /></label>
+          <label>Balance <input id="bias" type="range" min="0" max="1" step="0.01" /></label>
+          <p class="hint">At the middle, each way is as likely; toward the ends, one wins and the pattern straightens.</p>
+          <label>Colors <select id="palette"></select></label>
+          <label id="fill-box" class="check"><input type="checkbox" id="fill" /> Color the regions</label>
+          <label class="check"><input type="checkbox" id="shimmer" /> Keep turning</label>
+          <div class="buttons">
+            <button type="button" id="btn-shuffle">Shuffle</button>
+            <button type="button" id="btn-png" class="secondary">Download PNG</button>
+            <button type="button" id="btn-svg" class="secondary wide">Download SVG</button>
+          </div>
+          <p class="hint">Click a tile to turn it. The address of the page keeps the pattern, to share it.</p>
+        </div>
+      </div>
+
+      <h3>One tile, turned</h3>
+      <div class="explain">
+        <p>
+          In 1704 the Dominican priest Sébastien Truchet, who designed canals
+          and fountains for Louis XIV, published a study of a single square
+          tile, split along its diagonal into a dark and a light half. Laid in
+          its four orientations, it makes an endless variety of patterns, and
+          Truchet counted and catalogued them, as a mathematician would.
+        </p>
+        <p>
+          In 1987 the metallurgist Cyril Stanley Smith gave the idea a twist:
+          two quarter circles joining the middles of the sides. Every arc
+          meets the arc of the next tile, so the lines never end: laid at
+          random, they wander into meanders, and close into loops of every
+          size. The regions between them can always be colored with only two
+          colors, like a checkerboard of curves.
+        </p>
+        <p>
+          The same game with a diagonal line gives the maze of
+          <code>10 PRINT CHR$(205.5+RND(1)); : GOTO 10</code>, one line of
+          Commodore 64 BASIC that a book was written about in 2012. Push the
+          <em>Balance</em> away from the middle and order creeps back in:
+          long diagonals, rows of waves.
+        </p>
+      </div>
+
+      <div class="footer">
+        <p>
+          Truchet Tiles is open source on
+          <a href="https://github.com/evoluteur/truchet-tiles">GitHub</a>
+          with an MIT license.
+        </p>
+        <p>
+          Had fun browsing the app?
+          <a href="https://github.com/sponsors/evoluteur"
+            >Buy me a coffee by becoming a sponsor</a
+          >.
+        </p>
+        <p>
+          You may also enjoy
+          <a href="https://evoluteur.github.io/maze-maker/">Maze Maker</a>,
+          <a href="https://evoluteur.github.io/islamic-patterns/">Islamic Patterns</a>
+          and
+          <a href="https://evoluteur.github.io/kolam-maker/">Kolam Maker</a>.
+          See them all on
+          <a href="https://evoluteur.github.io/esoterica.html">Esoterica</a>.
+        </p>
+        <p class="copyright">
+          &#169; 2026
+          <a href="https://evoluteur.github.io/">Olivier Giulieri</a>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "name": "truchet-tiles",
+  "version": "1.0.0",
+  "description": "Truchet Tiles: lay one tile at random rotations and watch quarter arcs, triangles and diagonals weave into mazes, meanders and loops. Click to turn tiles, two-color the regions, and download PNG or SVG.",
+  "repository": "github:evoluteur/truchet-tiles",
+  "homepage": "https://evoluteur.github.io/truchet-tiles/",
+  "copyright": "(c) 2026 Olivier Giulieri",
+  "author": "Olivier Giulieri (https://evoluteur.github.io/)",
+  "license": "MIT",
+  "keywords": [
+    "truchet",
+    "truchet-tiles",
+    "smith-tiles",
+    "10-print",
+    "generative-art",
+    "pattern-generator",
+    "maze",
+    "tiling",
+    "svg",
+    "esoterica"
+  ]
+}
