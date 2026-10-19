@@ -16,7 +16,6 @@
     "pattern-generator",
     "maze",
     "tiling",
-    "svg",
-    "esoterica"
+    "svg"
   ]
 }

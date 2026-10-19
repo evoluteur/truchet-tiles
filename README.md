@@ -30,6 +30,6 @@ Truchet-Tiles is open source at [GitHub](https://github.com/evoluteur/truchet-ti
 
 Had fun browsing the app? [Buy me a coffee by becoming a sponsor](https://github.com/sponsors/evoluteur).
 
-You may also be interested in my other projects [Maze-Maker](https://github.com/evoluteur/maze-maker) ([demo](https://evoluteur.github.io/maze-maker/)), [Islamic-Patterns](https://github.com/evoluteur/islamic-patterns) ([demo](https://evoluteur.github.io/islamic-patterns/)) and [Kolam-Maker](https://github.com/evoluteur/kolam-maker) ([demo](https://evoluteur.github.io/kolam-maker/)). See them all on [Esoterica](https://evoluteur.github.io/esoterica.html).
+You may also be interested in my other projects [Maze-Maker](https://github.com/evoluteur/maze-maker) ([demo](https://evoluteur.github.io/maze-maker/)), [Islamic-Patterns](https://github.com/evoluteur/islamic-patterns) ([demo](https://evoluteur.github.io/islamic-patterns/)) and [Kolam-Maker](https://github.com/evoluteur/kolam-maker) ([demo](https://evoluteur.github.io/kolam-maker/)). See them all on [Generative Art](https://evoluteur.github.io/generative-art.html).
 
 Copyright (c) 2026 [Olivier Giulieri](https://evoluteur.github.io/).
